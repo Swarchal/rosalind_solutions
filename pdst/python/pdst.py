@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from sys import argv
+import sys
 import numpy as np
 from Bio import SeqIO
 
@@ -24,7 +24,7 @@ def pairwise_pdist(x):
 
 
 if __name__ == "__main__":
-    seqs = read_fasta(argv[1])
+    seqs = read_fasta(sys.argv[1])
     ans = pairwise_pdist(seqs)
-    np.savetxt("ans.txt", ans, fmt='%2f', delimiter=' ')
+    np.savetxt(sys.stdout.buffer, ans, fmt='%.4f')
 
