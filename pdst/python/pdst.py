@@ -14,12 +14,8 @@ def read_fasta(file_path):
 def pdist(s1, s2):
     """ proportional distance between two strings """
     assert len(s1) == len(s2)
-    total = 0
-    for i in range(len(s1)):
-        if s1[i] != s2[i]:
-            total += 1
-    return total / len(s1)
-        
+    return sum([i != j for i,j in zip(s1, s2)]) / len(s1)
+
 
 def pairwise_pdist(x):
     """ slow pairwise pdist between a list of strings """
