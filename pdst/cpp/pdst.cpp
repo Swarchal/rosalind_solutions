@@ -37,8 +37,10 @@ vector<vector<float> > p_pdist(vector<string> x)
     int len = x.size();
     vector<vector<float> > mat(len, vector<float>(len));
     // pairs of strings in x
-    for (int i=0; i<len; i++) {
-        for (int j=0; j<len; j++) {
+    for (int i=0; i<len; i++)
+    {
+        for (int j=0; j<len; j++)
+	{
             mat[i][j] = pdist(x[i], x[j]);
         }
     }
