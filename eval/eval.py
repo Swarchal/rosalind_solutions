@@ -10,8 +10,8 @@ Return : An array B, having the same length as A, in which B[i] represents
          A[i].
 """
 
-import sys
 import numpy as np
+import sys
 
 def parse_input(file_in):
     """parse input into list [n::int, s::str, A::list]"""
@@ -21,18 +21,21 @@ def parse_input(file_in):
     return out
 
 
-def prob_nucleotide(gc_prop, s):
+def prob_motif(gc_prop, s):
+    """probability of a random motif given GC proportion"""
     gc = gc_prop / 2
     at = (1 - gc_prop) / 2
     nuc_dict = {"G":gc, "C":gc, "A":at, "T":at}
-    return np.prod([nuc_dict[nuc] for nuc in s])
+    return np.prod([nuc_dict[i] for i in s])
 
 
 def _eval(n, s, A):
-   return [prob_nucleotide(i, s)*(n-1) for i in A]
-
+    """number of motifs given GC proportion"""
+    return [prob_nucleotide(i, s) * (n - 1) for i in A]
+ 
 
 def main(file_in):
+    """parse input file and calculate number B[i] for i in A"""
     input_list = parse_input(file_in)
     return _eval(*input_list)
 
