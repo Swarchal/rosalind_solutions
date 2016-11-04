@@ -31,7 +31,7 @@ def prob_motif(gc_prop, s):
 
 def _eval(n, s, A):
     """number of motifs given GC proportion"""
-    return [prob_nucleotide(i, s) * (n - 1) for i in A]
+    return [prob_motif(i, s) * (n - 1) for i in A]
  
 
 def main(file_in):
