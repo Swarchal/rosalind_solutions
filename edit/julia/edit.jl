@@ -27,9 +27,8 @@ end
 
 
 function main()
-    s = "saturday"
-    t = "sunday"
-    println(edit_dist(s, t))
+    a, b = parse_fasta(ARGS[1])
+    println(edit_dist(a, b))
 end
 
 main()
