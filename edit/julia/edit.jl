@@ -9,15 +9,14 @@ end
 
 function edit_dist(s::String, t::String)
     d = zeros(Int64, length(s)+1, length(t)+1)
-    d[1, :] = range(1, length(s)+1)
-    d[:, 1] = range(1, length(t)+1)
-    @inbounds # speeeed!
-    for i, si, in enumerate(s)
-        for j, tj in enumerate(t)
-            if si != tj
-                d[i+1, j+1] = minumum(d[i+1, j]+1,
-                                      d[i, j+1]+1,
-                                      d[i, j] + 1)
+    d[1, :] = range(0, length(t)+1)
+    d[:, 1] = range(0, length(s)+1)
+    for i in range(1, length(s))
+        for j in range(1, length(t))
+            if s[i] != t[j]
+                d[i+1, j+1] = minimum([d[i+1, j]+1,
+                                       d[i, j+1]+1,
+                                       d[i, j] + 1])
             else
                 d[i+1, j+1] = d[i, j]
             end
@@ -28,8 +27,9 @@ end
 
 
 function main()
-    s, t = parse_fasta(ARGS[1])
-    print(edit_dist(s, t))
+    s = "saturday"
+    t = "sunday"
+    println(edit_dist(s, t))
 end
 
 main()
