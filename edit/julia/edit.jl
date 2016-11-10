@@ -16,7 +16,7 @@ function edit_dist(s::String, t::String)
             if s[i] != t[j]
                 d[i+1, j+1] = minimum([d[i+1, j]+1,
                                        d[i, j+1]+1,
-                                       d[i, j] + 1])
+                                       d[i, j]+1])
             else
                 d[i+1, j+1] = d[i, j]
             end
