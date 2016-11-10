@@ -13,13 +13,11 @@ void edit_dist(vector<string> seqs)
     assert(seqs.size() == 2);
     string s = seqs[0];
     string t = seqs[1];
-
-    // get length of two strings
     int len_s = s.size();
     int len_t = t.size();
 
     // create matrix of size 1:len(s)+1 by 1:len(t)+1
-    vector<vector<int> > d(len_s+1, vector<int>(len_t+1));
+    vector<vector<int>> d(len_s+1, vector<int>(len_t+1));
 
     // make borders consectively numbered from 1:len_s and 1:len_t
     for (int i=0; i<=len_s; i++)
@@ -36,10 +34,7 @@ void edit_dist(vector<string> seqs)
     {
         for (int j=1; j<=len_t; j++)
         {
-            char s_cur = s[i-1];
-            char t_cur = t[j-1];
-
-            if (s_cur == t_cur)
+            if (s[i-1] == t[j-1])
             {
                 d[i][j] = d[i-1][j-1];
             } else
@@ -52,17 +47,6 @@ void edit_dist(vector<string> seqs)
             }
         }
     }
-
-    // // DEBUG: print out matrix
-    // for (int i=0; i<=len_s; i++)
-    // {
-    //     for (int j=0; j<=len_t; j++)
-    //     {
-    //         cout << d[i][j] << " ";
-    //     }
-    //     cout << "\n";
-    // }
-
     cout << d[len_s][len_t] << "\n";
 }
 
