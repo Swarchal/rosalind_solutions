@@ -26,7 +26,7 @@ mass_dict = Dict(
 # reverse dictionary and round mass to 3 decimal places
 mass_dict = Dict(round(mass, 3) => amino for (amino, mass) in mass_dict)
 
-function main(path)=>
+function main(path)
     mass_arr = readdlm(path)[:]
     seq = ""
     for i in range(2, length(mass_arr)-1)
