@@ -1,7 +1,6 @@
 #!/usr/bin/env julia
 # rosalind/problems/long; assembling long reads
-# FIXME works on example data, not on real dataset
-# need to also try reversed inputs
+# FIXME works on example data, not on real dataset!!!
 
 using FastaIO
 using Combinatorics
@@ -25,10 +24,17 @@ function str_merge(s::String, t::String, o::String)
     return s[1:rsearchindex(s, o)-1] * o * replace(t, o, "")
 end
 
+function all_pairs(collection)
+    # return all pairs (including reversals)
+    forward = collect(combinations(collection, 2))
+    backward = collect(combinations(reverse(collection), 2))
+    return vcat(forward, backward)
+end
 
-function long(reads)
+
+function ☹(reads)
     new_ans = []
-    for (s, t) in combinations(reads, 2)
+    for (s, t) in all_pairs(reads)
         overlap = get_overlap(s, t)
         if overlap != nothing
             new_seqs = str_merge(s, t, overlap)
@@ -41,7 +47,7 @@ end
 reads = read_fasta(ARGS[1])
 
 while length(reads) > 1
-    reads = long(reads)
+    reads = ☹(reads)
 end
 
 println(reads)
