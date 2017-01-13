@@ -7,9 +7,12 @@ using Combinatorics
 
 read_fasta(path) = [i[2] for i in FastaIO.readfasta(path)]
 
+len_long(s, t) = max(length(s), length(t))
+
 function get_overlap(s, t)
     # return overlap of suffix of s to prefix of t; otherwise return nothing
-    for i in 1:div(length(s), 2)
+    # find length of longest of the pair of strings
+    for i in 1:div(len_long(s, t), 2)
         s = s[2:end]
         t = t[1:end-1]
         if s == t
@@ -24,6 +27,7 @@ function str_merge(s::String, t::String, o::String)
     return s[1:rsearchindex(s, o)-1] * o * replace(t, o, "")
 end
 
+
 function all_pairs(collection)
     # return all pairs (including reversals)
     forward = collect(combinations(collection, 2))
@@ -32,8 +36,8 @@ function all_pairs(collection)
 end
 
 
-function ☹(reads)
-    new_ans = []
+function long(reads::Array{String, 1})
+    new_ans = Array{String, 1}()
     for (s, t) in all_pairs(reads)
         overlap = get_overlap(s, t)
         if overlap != nothing
@@ -46,8 +50,13 @@ end
 
 reads = read_fasta(ARGS[1])
 
+# poor man's recursion
 while length(reads) > 1
-    reads = ☹(reads)
+    reads = long(reads)
 end
 
-println(reads)
+if length(reads) == 1
+    println(reads[1])
+else
+    println("FAILED!!!")
+end
