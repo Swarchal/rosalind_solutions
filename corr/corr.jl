@@ -1,6 +1,5 @@
 #!/usr/bin/env julia
 # rosalind/corr
-
 using FastaIO
 using Iterators
 using Combinatorics
@@ -8,7 +7,6 @@ using Combinatorics
 get_seqs(path) = [i[2] for i in FastaIO.readfasta(path)]
 
 hamming(s::String, t::String) = sum(i != j for (i, j) in zip(s, t))
-
 
 function revc(seq::String)
     """reverse complement of a DNA sequence"""
@@ -23,8 +21,7 @@ function find_correct_reads(seqs::Array{String, 1})
     for pair in combinations(seqs, 2)
         s, t = pair
         if s == t || revc(s) == t
-            push!(correct_seqs, s)
-            push!(correct_seqs, t)
+            push!(correct_seqs, s, t)
         end
     end
     return unique(correct_seqs)
