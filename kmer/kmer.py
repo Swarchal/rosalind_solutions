@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.6
 # rosalind/kmer
 import sys
 import re
@@ -7,7 +7,7 @@ from Bio import SeqIO
 
 def count_kmer(string, kmer):
     """use regex lookaheads to count overlapping matches"""
-    return len(re.findall("(?={})".format(kmer), string))
+    return len(re.findall(f"(?={kmer})", string))
 
 
 def get_seq(path):
