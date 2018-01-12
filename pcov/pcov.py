@@ -26,7 +26,6 @@ e.g
 """
 
 import sys
-import itertools
 
 def read_file(filepath):
     return [line.strip() for line in open(filepath, "r")]
