@@ -2,6 +2,7 @@
 
 import os, sets, tables, strutils, sequtils
 
+
 proc read_file(filepath: string): seq[string] =
   let f = open(filepath, fmRead)
   result = @[]
@@ -29,7 +30,7 @@ proc join_strings(s: string): string =
   return "($#, $#)" % [s[0 .. ^2], s[1 .. ^1]]
 
 
-proc make_de_bruijn_graph(seqs: seq[string]): HashSet[string] =
+proc make_graph(seqs: seq[string]): HashSet[string] =
   result = initSet[string]()
   for s in seqs:
     result.incl(join_strings(s))
@@ -37,10 +38,9 @@ proc make_de_bruijn_graph(seqs: seq[string]): HashSet[string] =
 
 let
   seqs = read_file(paramStr(1))
-  revc_seqs = seqs.map(reverse_complement)
-  graph_forward = make_de_bruijn_graph(seqs)
-  graph_backward = make_de_bruijn_graph(revc_seqs)
-  graphs = union(graph_forward, graph_backward)
+  all_seqs = concat(seqs, seqs.map(reverse_complement))
+  graphs = make_graph(all_seqs)
+
 for i in graphs:
   echo i
 
