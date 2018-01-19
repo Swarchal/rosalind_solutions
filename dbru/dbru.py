@@ -5,7 +5,6 @@ roadlind.info/dbru
 """
 
 import sys
-import itertools
 
 def read_file(filepath):
     return set(line.strip() for line in open(filepath, "r").readlines())
