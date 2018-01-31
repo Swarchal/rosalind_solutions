@@ -27,9 +27,7 @@ proc find_motif(sequence: string,
   while last_position != -1:
     last_position = find(sequence, motif, start=last_position+1)
     if last_position != -1:
-      result.add(last_position)
-    # add 1 to positions (zero-indexed => 1-indexed)
-  result = result.map(proc(x:int): int= x+1)
+      result.add(last_position + 1)
 
 
 proc print(x: seq, sep: string = " ") =
