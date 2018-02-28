@@ -1,10 +1,9 @@
 object DNA {
 
-  def countNucleotides(s: String) {
+  def countNucleotides(seq: String) {
     /* rosalind.info/dna
        count nucleotides in a DNA sequence */
-    val nucleotides = List('A', 'C', 'G', 'T').distinct
-    nucleotides.foreach(c => print(s.count(_ == c) + " "))
+    "ACGT".foreach(nuc => print(seq.count(_ == nuc) + " "))
   }
 
 }
